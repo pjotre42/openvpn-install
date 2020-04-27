@@ -3,6 +3,9 @@ OpenVPN [road warrior](http://en.wikipedia.org/wiki/Road_warrior_%28computing%29
 
 This script will let you set up your own VPN server in no more than a minute, even if you haven't used OpenVPN before. It has been designed to be as unobtrusive and universal as possible.
 
+This is a fork of the original version by user Nyr https://github.com/Nyr/openvpn-install
+implemeting changes needed by me
+
 ### Installation
 Run the script and follow the assistant:
 
@@ -15,4 +18,5 @@ You can get a VPS from just $1/month at [VirMach](https://billing.virmach.com/af
 
 ### Donations
 
+Actual script credit by user Nyr! https://github.com/Nyr/openvpn-install
 If you want to show your appreciation, you can donate via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VBAYDL34Z7J6L) or [cryptocurrency](https://pastebin.com/raw/M2JJpQpC). Thanks!
