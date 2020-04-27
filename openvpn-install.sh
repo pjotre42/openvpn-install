@@ -396,12 +396,13 @@ else
 	echo "Looks like OpenVPN is already installed."
 	echo
 	echo "What do you want to do?"
-	echo "   1) Add a new user"
+	echo "   1) Add a new user (no password)"
 	echo "   2) Revoke an existing user"
 	echo "   3) Remove OpenVPN"
 	echo "   4) Exit"
+	echo "   5) Add a new user (with password)"
 	read -p "Select an option: " option
-	until [[ "$option" =~ ^[1-4]$ ]]; do
+	until [[ "$option" =~ ^[1-5]$ ]]; do
 		echo "$option: invalid selection."
 		read -p "Select an option: " option
 	done
@@ -516,6 +517,24 @@ else
 			exit
 		;;
 		4)
+			exit
+		;;
+		5)
+			echo
+			echo "Tell me a name for the client certificate."
+			read -p "Client name: " unsanitized_client
+			client=$(sed 's/[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-]/_/g' <<< "$unsanitized_client")
+			while [[ -z "$client" || -e /etc/openvpn/server/easy-rsa/pki/issued/"$client".crt ]]; do
+				echo "$client: invalid client name."
+				read -p "Client name: " unsanitized_client
+				client=$(sed 's/[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-]/_/g' <<< "$unsanitized_client")
+			done
+			cd /etc/openvpn/server/easy-rsa/
+			EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full "$client"
+			# Generates the custom client.ovpn
+			new_client
+			echo
+			echo "Client $client added, configuration is available at:" ~/"$client.ovpn"
 			exit
 		;;
 	esac
