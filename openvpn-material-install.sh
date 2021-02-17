@@ -84,7 +84,7 @@ new_client () {
 	echo "<tls-crypt>"
 	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/server/tc-"$server_mode".key
 	echo "</tls-crypt>"
-	} > ~/openvpn-"$server_mode"/"$client".ovpn
+	} > ~/vpnuser/"$server_mode"/"$client".ovpn
 }
 
 if [[ ! -e /etc/openvpn/server/server-"$server_mode".conf ]]; then
@@ -430,7 +430,7 @@ verb 3" > /etc/openvpn/server/client-"$server_mode"-common.txt
 	echo
 	echo "Finished!"
 	echo
-	echo "Your client configuration is available at:" ~/"$client.ovpn"
+	echo "Your client configuration is available at:" ~/vpnuser/"$server_mode"/"$client.ovpn"
 	echo "If you want to add more clients, just run this script again!"
 else
 	clear
