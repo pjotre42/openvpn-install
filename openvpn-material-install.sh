@@ -550,7 +550,7 @@ else
 				#else
 				#	# Else, OS must be CentOS or Fedora
 				#	yum remove -y openvpn
-				fi
+				#fi
 				echo
 				echo "OpenVPN removed partially! You still need to clear /etc/openvpn/server directory and remove openvpn package"
 			else
